@@ -53,6 +53,7 @@ module.exports = async (c, fileNames, m, prefix) => {
     // args
     /*
     minArgs : int
+;primes-under 10000000
     maxArgs : int
     argsType : true ? (separated) : (one thing)
     [var 1, var 2, etc]
@@ -80,8 +81,6 @@ module.exports = async (c, fileNames, m, prefix) => {
       if(max === -1) { max = 10000; }
       if(max < min) { throw new Error(`${ fp }: min args can't be bigger than max args.`); }
       if(!split) { args = args.join(' '); }
-
-      console.log('VARS, ARGS LENGTH -', vars.length, args.length);
 
       // no args and none provided
       if(vars.length === 0 && args.length === 0) {
@@ -111,7 +110,6 @@ module.exports = async (c, fileNames, m, prefix) => {
 
         // split
         ret = await obj.execute({ m, cl: c, cf }, argsToPass);
-        console.log('VARS - ', vars, '\nARGS - ', argsToPass);
       }
     } else {
       ret = await obj.execute({ m, cl: c, cf });
@@ -132,119 +130,3 @@ module.exports = async (c, fileNames, m, prefix) => {
 
   m.reply(`I don't know what the command "${ command }" is.`);
 }
-
-/*
-const userId = '273960318429036545';
-let argsToPass = {};
-
-module.exports = async (c, fileNames, m, prefix) => {
-  let thing = false;
-  for(let i = 0; i < prefix.length; i++) {
-    if(m.content.startsWith(prefix[i])) {
-      thing = true;
-      m.content = m.content.substring(prefix[i].length);
-    }
-  }
-
-  if(!thing) { return; }
-
-  let args = m.content.split(/ +/);
-  let command = args[0].toLowerCase();
-  args.shift();
-
-  for(let file of fileNames) {
-    if(command !== file[0]) { continue; }
-    let obj = file[2];
-    let fp = file[1];
-
-    // ownerOnly: Boolean
-    if(obj.ownerOnly && m.author.id !== userId) {
-      console.log(m.author.id === userId)
-      m.reply("You aren't allowed to use this command, because you aren't the bot owner.");
-      return;
-    } 
-
-    // args
-    /*
-    [
-      minArgs,
-      maxArgs,
-      argsType === true ? ( separated ) : ( connected )
-      [
-        name of var 1,
-        name of var 2,
-        ...
-      ],
-      (optional) argFormat
-    ]
-    /
-
-
-    let thing = '';
-    if(obj.args) {
-      argsToPass = {}; 
-      let a = obj.args;
-
-      if(
-        typeof a[0] !== 'number'
-        || typeof a[1] !== 'number'
-        || typeof a[2] !== 'boolean'
-        || typeof a[3] !== 'object'
-      ) { throw new Error(`${ fp }: args incorrectly formatted.`); }
-
-      // min args vs max args
-      let min = a[0];
-      let max = a[1];
-      let split = a[2]; // true = split, false = together;
-      let vars = a[3];
-      let format = a[4];
-
-      if(max === -1) { max = 10000; }
-      if(max < min) { throw new Error(`${ fp }: min args can't be bigger than max args.`); }
-      if(!split) { args = args.join(' '); }
-
-      // cases
-      console.log(vars.length, args.length)
-      // no args and none provided
-      if(vars.length === 0 && args.length === 0) {
-        thing = await obj.execute({ m, cl: c, cf }, {});
-      }
-
-      // no args and provided
-      else if(vars.length === 0 && args.length > 0) {
-        m.channel.send('There aren\'t supposed to be any arguments for this command.');
-      }
-
-      // args and none provided
-      else if(vars.length > 0 && args.length === 0) {
-        m.channel.send(`The arguments for this command are: ${ format }`);
-      }
-      
-      // args and provided
-      else {
-        for(let i = 0; i < vars.length; i++) {
-          argsToPass[`${ vars[i] }`] = args[i];
-        }
-        thing = await obj.execute({ m, cl: c, cf }, argsToPass);
-        console.log('VARS - ', vars, '\nARGS -', argsToPass);
-      }
-    } else {
-      thing = await obj.execute({ m, cl: c, cf });
-    }
-
-    // get databased
-    
-    if(thing === 0 || !thing) {
-      return;
-    } else if(thing === 1) {
-      console.log(`${ command } failed, try again in a few moments.`);
-    } else {
-      m.channel.send(thing);
-    }
-    
-    return;
-  }
-
-  m.reply(`I don't know what the command "${ command }" is`)
-}
-*/

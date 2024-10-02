@@ -4,14 +4,32 @@ module.exports = {
   
   args: [1, 1, false, ['n'], '<number>'],
 
-  execute({}, { n }) {
+  execute({ m }, { n }) {
     let s = sieve(n);
-    if(s.length > 20) {
-      return `There are ${ s.length } prime numbers below ${ n }`;
-    }
 
-    return `The prime numbers below ${ n } are ${ s }`
-  }
+    if(n.length < 7) {
+      if(s.length > 20) {
+        return `There are ${ s.length } prime numbers below ${ n }`;
+      }
+
+      return `The prime numbers below ${ n } are ${ s }`
+    } else {
+      m.channel.send('Big Boy is working, please wait...')
+        .then((msg) => {
+          // created at
+          const created = m.createdTimestamp;
+          msg.edit(`There are ${ s.length } prime numbers below ${ n }`)
+            .then((message) => {
+              const edited = msg.editedTimestamp;
+              const diff = `${ edited - created }ms`;
+
+              console.log(created, edited)
+
+              message.edit(`There are ${ s.length } prime numbers below ${ n } (took ${ diff })`);
+            });
+          });
+    }
+  } 
 }
 
 function sieve(limit) {

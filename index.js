@@ -9,7 +9,8 @@ const { token, prefix } = require('./config.json');
 const readCommands = require('./util/read-commands');
 const commandHandler = require('./util/command-handler');
 const channelCache = require('./util/channel-cache');
-const yearProgress = require('./util/year-progress')
+const yearProgress = require('./util/year-progress');
+const quotes = require('./util/quotes');
 
 const respond = require('./features/respond');
 const certified = require('./features/certified');
@@ -66,7 +67,10 @@ client.on(Events.MessageCreate, (m) => {
     ['oi', 'oi', 'start'],
     ['ping', 'pong!', 'start'],
     ['peepee', 'poopoo', 'start'],
-    ['ayo mistuh white', 'bitch', 'start']
+    ['ayo mistuh white', 'bitch', 'start'],
+    ['<3', '<3', 'start'],
+    ['i love you', 'get a room', 'start'],
+    ['gimme a quote', `${ quotes() }`, 'start']
   ]);
   certified(m);
 

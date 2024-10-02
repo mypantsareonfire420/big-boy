@@ -33,7 +33,7 @@ function addXp(m, id, amount = 1) {
     };
   }
 
-  console.log(profile);
+  // console.log(profile);
 
   profile.sent += 1;
   profile.xp += amount;
