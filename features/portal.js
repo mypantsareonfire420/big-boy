@@ -2,6 +2,7 @@ module.exports = (m, list) => {
   // guild id, channel id, guild name, channel name, channel topic
   
   if(!m.channel.topic?.includes('<!-- portal -->')) { return; }
+  if(m.content.includes('.gg')) { return; }
 
   const channelId = m.channel.id;
   let channels = [];
@@ -12,6 +13,6 @@ module.exports = (m, list) => {
   }
 
   for(let ch of channels) {
-    ch[2].send(`Incoming from ${ ch[2].guild.name }:\n${ m.content }`);
+    ch[2].send(`**${ m.author.username } @ ${ ch[2].guild.name }**:\n${ m.content }`);
   }
 };
