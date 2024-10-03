@@ -23,7 +23,7 @@ module.exports = {
       return `You two are 0% compatible.`;
     }
 
-    let quality = parseFloat(`0.${ target1.id.toFixed(5) * target2.id.toFixed(5) }`);
+    let quality = parseFloat(`0.${ (target1.id.toFixed(5) * target2.id.toFixed(5)).toString().reverse() }`);
     return `You two are ${ (quality * 100).toFixed(2) }% compatible.`
   }
 }
