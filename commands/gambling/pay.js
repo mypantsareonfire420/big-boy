@@ -2,7 +2,7 @@ const { getCoins, addCoins } = require('../../features/economy');
 
 module.exports = {
   name: 'pay',
-  description: 'checks a user\'s balance',
+  description: 'pay another user',
 
   args: [2, 2, true, ['amount', 'target'], '<amount : Number> <target : user>'],
 
