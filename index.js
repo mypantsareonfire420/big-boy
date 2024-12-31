@@ -37,6 +37,7 @@ client.once(Events.ClientReady, async (ready) => {
   fileNames = await readCommands();
 
   client.user.setStatus('dnd');
+  bio();
 });
 
 async function bio() {
