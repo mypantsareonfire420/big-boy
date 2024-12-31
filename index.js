@@ -39,6 +39,21 @@ client.once(Events.ClientReady, async (ready) => {
   client.user.setStatus('dnd');
 });
 
+async function bio() {
+  client.user.setPresence({
+    activities: [{
+      name: `${ new Date().getFullYear() } is ${ yearProgress() }% done.
+I am ${ ((new Date() - new Date('2022-03-31 14:00')) / (1000 * 60 * 60 * 24 * 365.2425)).toFixed(2) } years old.`
+    }],
+  });
+
+  for(let i = 0; i < 60; i++) {
+    await new Promise((res) => setTimeout(res, 1000));
+  }
+
+  bio();
+}
+
 let x = 0;
 let cache;
 client.on(Events.MessageCreate, (m) => {
@@ -74,15 +89,7 @@ client.on(Events.MessageCreate, (m) => {
   ]);
   certified(m);
 
-  client.user.setPresence({
-    activities: [{
-      name: `${ new Date().getFullYear() } is ${ yearProgress() }% done.
-I am ${ ((new Date() - new Date('2022-03-31 14:00')) / (1000 * 60 * 60 * 24 * 365.2425)).toFixed(2) } years old.`,
-      url: 'https://thebulletin.org/doomsday-clock/'
-    }],
-  })
-
   x++;
-})
+});
 
 client.login(token);
