@@ -46,14 +46,13 @@ module.exports = async (c, fileNames, m, prefix) => {
     // ownerOnly: boolean
     if(obj.ownerOnly && m.author.id !== userId) {
       console.log(m.author.id === userId);
-      m.reply("You aren't allowed to use this command, as you don't own me.");
+      m.reply("You aren't allowed to use this command, as you aren't @mypantsareonfire");
       return;
     }
 
     // args
     /*
     minArgs : int
-;primes-under 10000000
     maxArgs : int
     argsType : true ? (separated) : (one thing)
     [var 1, var 2, etc]
@@ -93,7 +92,7 @@ module.exports = async (c, fileNames, m, prefix) => {
       }
 
       // args and none provided
-      else if(vars.length > 0 && args.length === 0) {
+      else if(vars.length > 0 && args.length === 0 && min !== 0) {
         m.channel.send(`The arguments for this command are: ${ format }`);
       }
 
@@ -109,10 +108,10 @@ module.exports = async (c, fileNames, m, prefix) => {
         }
 
         // split
-        ret = await obj.execute({ m, cl: c, cf }, argsToPass);
+        ret = await obj.execute({ m, cl: c, cf, fn: fileNames }, argsToPass);
       }
     } else {
-      ret = await obj.execute({ m, cl: c, cf });
+      ret = await obj.execute({ m, cl: c, cf, fn: fileNames });
     }
 
     // get databased on

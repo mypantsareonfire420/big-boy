@@ -5,6 +5,6 @@ module.exports = {
 
     execute() {
       return `It you would like to support me, please donate to $mypantsareonfire!
-I would very much appreciate it! ()`;
+I would very much appreciate it! <3`;
     }
 }

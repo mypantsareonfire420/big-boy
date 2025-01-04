@@ -44,7 +44,9 @@ async function bio() {
   client.user.setPresence({
     activities: [{
       name: `${ new Date().getFullYear() } is ${ yearProgress() }% done.
-I am ${ ((new Date() - new Date('2022-03-31 14:00')) / (1000 * 60 * 60 * 24 * 365.2425)).toFixed(2) } years old.`
+I am ${ ((new Date() - new Date('2022-03-31 14:00 EST')) / (1000 * 60 * 60 * 24 * 365.2425)).toFixed(2) } years old. (${
+  ((new Date() - new Date('2022-03-31 14:00 EST')) / (1000 * 60 * 60 * 24)).toFixed(0)
+} days old)`
     }],
   });
 
