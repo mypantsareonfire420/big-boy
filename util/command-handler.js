@@ -127,5 +127,5 @@ module.exports = async (c, fileNames, m, prefix) => {
     return;
   }
 
-  m.reply(`I don't know what the command "${ command }" is.`);
+  // m.reply(`I don't know what the command "${ command }" is.`);
 }
